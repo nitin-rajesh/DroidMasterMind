@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/colorVal"
-        android:title="Variable count"
+        android:title="Constant count"
         app:showAsAction="never">
         <menu>
             <item android:id="@+id/val8"
@@ -17,7 +17,7 @@
         </menu>
     </item>
     <item android:id="@+id/columnVal"
-        android:title="Constant count"
+        android:title="Variable count"
         app:showAsAction="never">
         <menu>
             <item android:id="@+id/grid4"

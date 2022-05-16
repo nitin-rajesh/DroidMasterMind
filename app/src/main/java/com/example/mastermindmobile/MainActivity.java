@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gameSettings = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+        gameSettings = MainActivity.this.getSharedPreferences(getString(R.string.pref_class),Context.MODE_PRIVATE);
         gameSettingsEditor = gameSettings.edit();
 
         button = findViewById(R.id.button);
@@ -44,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.config_menu, menu);
+        boolean isRep = gameSettings.getBoolean(getString(R.string.toggle_repeat),false);
+        if (isRep) {
+            menu.findItem(R.id.isRepeat).setTitle("Disable repetitions");
+        } else {
+            menu.findItem(R.id.isRepeat).setTitle("Enable repetitions");
+        }
         return true;
     }
 
@@ -51,7 +57,46 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.grid4:
-                break;
+                gameSettingsEditor.putInt(getString(R.string.var_count),4);
+                gameSettingsEditor.commit();
+                Log.d("MenuItem","4");
+                return true;
+            case R.id.grid6:
+                gameSettingsEditor.putInt(getString(R.string.var_count),6);
+                gameSettingsEditor.commit();
+                Log.d("MenuItem","6");
+                return true;
+            case R.id.grid8:
+                gameSettingsEditor.putInt(getString(R.string.var_count),8);
+                gameSettingsEditor.commit();
+                Log.d("MenuItem","8");
+                return true;
+            case R.id.val8:
+                gameSettingsEditor.putInt(getString(R.string.const_count),8);
+                gameSettingsEditor.commit();
+                return true;
+            case R.id.val10:
+                gameSettingsEditor.putInt(getString(R.string.const_count),10);
+                gameSettingsEditor.commit();
+                return true;
+            case R.id.val12:
+                gameSettingsEditor.putInt(getString(R.string.const_count),12);
+                gameSettingsEditor.commit();
+                return true;
+            case R.id.val16:
+                gameSettingsEditor.putInt(getString(R.string.const_count),16);
+                gameSettingsEditor.commit();
+                return true;
+            case R.id.isRepeat:
+                boolean isRep = gameSettings.getBoolean(getString(R.string.toggle_repeat),false);
+                gameSettingsEditor.putBoolean(getString(R.string.toggle_repeat),!isRep);
+                gameSettingsEditor.commit();
+                if (!isRep == true) {
+                    item.setTitle("Disable repetitions");
+                } else {
+                    item.setTitle("Enable repetitions");
+                }
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

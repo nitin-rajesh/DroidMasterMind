@@ -3,7 +3,9 @@ package com.example.mastermindmobile;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -43,18 +45,24 @@ public class GameActivity extends AppCompatActivity {
 
     GameRecord gameRecord;
 
+    SharedPreferences gameSettings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         setContentView(R.layout.activity_game);
 
-        gameRecord = new GameRecord(4,8,false);
+        gameSettings = GameActivity.this.getSharedPreferences(getString(R.string.pref_class),Context.MODE_PRIVATE);
+
+        gameRecord = new GameRecord(gameSettings.getInt(getString(R.string.var_count),4),
+                gameSettings.getInt(getString(R.string.const_count),8),
+                gameSettings.getBoolean(getString(R.string.toggle_repeat),false));
 
         guessEntry = findViewById(R.id.guessEntry);
         guessEntry.setFocusableInTouchMode(true);
         guessEntry.requestFocus();
-        guessEntry.setHint("Range: 1-" + gameRecord.numberOfColors);
+        guessEntry.setHint("Range: 1-" + gameRecord.numberOfColors + (gameRecord.isRepeat?" +repetitions":""));
         guessEntry.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {

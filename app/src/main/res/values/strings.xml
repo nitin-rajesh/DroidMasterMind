@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">MasterMind mobile</string>
-    <string name="var_count">VariableCount</string>
-    <string name="const_count">ConstantCount</string>
-    <string name="toggle_repeat">ToggleRepetitions</string>
+    <string name="var_count">VARIABLE_COUNT</string>
+    <string name="const_count">CONSTANT_COUNT</string>
+    <string name="toggle_repeat">TOGGLE_REPETITIONS</string>
+    <string name="pref_class">COMMON_PREFERENCES</string>
+    <string name="mastermind">MasterMind</string>
+    <string name="start">Start</string>
+    <string name="how_to_play">How to play</string>
 </resources>
